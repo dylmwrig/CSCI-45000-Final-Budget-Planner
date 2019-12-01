@@ -2,7 +2,7 @@
 
 <div class="ui main text container segment">
     <div class="ui huge header">New Budget</div>
-        <form class="ui form" action="/budgets" method="POST">
+        <form class="ui form" action="/budgets/new" method="POST">
                 <div class="field">
                     <label>Budget Name</label>
                     <input required type="text" name="budget[name]" placeholder="Budget Name">
@@ -13,11 +13,11 @@
                 </div>
                 <div class="field">
                     <label>Start Date</label>
-                    <input type="date" name="budget[startDate]" placeholder="Start date">
+                    <input required type="date" name="budget[startDate]" placeholder="Start date">
                 </div>
                 <div class="field">
                     <label>End Date</label>
-                    <input type="date" name="transaction[endDate]" placeholder="End date">
+                    <input required type="date" name="budget[endDate]" placeholder="End date">
                 </div>
                 <input class="ui button" type="submit">
         </form>

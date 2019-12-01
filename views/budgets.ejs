@@ -4,13 +4,16 @@
     <div class="ui huge header">Budget Calculator</div>
     <div class="ui top attached segment">
         <div class="ui divided items">
+          <div class="ui header">Add a new budget
+            <a href="/budgets/new" id="add" class="ui positive basic button"><i class="plus icon"></i></a>
+          </div>
             <% budgets.forEach(function(budget){ %>
                 <div class="item">
                     <div class="content">
                         <span class="header">Budget Name: &nbsp;</span><a class="header" href="/budgets/<%=budget._id%>" ><%=budget.name%></a>
                         <div class="amountConstraint">
                                 <p><span>Amount Constraint: &nbsp;$</span><%- budget.amountConstraint %></p>
-                            </div>
+                        </div>
                         <div class="startDate">
                             <span>Start Date: <%= budget.startDate.toDateString() %></span>
                         </div>

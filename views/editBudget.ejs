@@ -1,0 +1,22 @@
+<% include ./partials/header %>
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit: "<%=budget.name%>"</div>
+    <form class="ui form" action="/budgets/<%= budget._id %>?_method=PUT" method="POST">
+            <div class="field">
+                <label>Name</label>
+                <input required type="text" name="budget[name]" value="<%=budget.name%>">
+            </div>
+            <label>Total Amount Constraint</label>
+                <input required type="number" name="budget[amountConstraint]" value="<%=budget.amountConstraint%>">
+
+            <label>Start Date</label>
+                <input required type="date" name="budget[startDate]" value="<%=budget.startDate%>">
+
+            <label>End Date</label>
+                <input required type="date" name="budget[endDate]" value="<%=budget.endDate%>">
+
+            <input class="ui button" type="submit">
+    </form>
+</div>
+
+<% include ./partials/footer %>

@@ -110,8 +110,8 @@ app.get("/transactions/:id/edit",function(req,res){
 //Update route
 app.put("/transactions/:id",function(req,res){
     //Make sure user input doesn't have script tags (may be malicious)
-    req.body.transaction.body = req.sanitize(req.body.transaction.body);
-    Transaction.findByIdAndUpdate(req.params.id, req.body.transaction ,function(err, updatedTransaction){
+    req.body.transaction.name = req.sanitize(req.body.transaction.name);
+    Transaction.findByIdAndUpdate(req.params.id, req.name.transaction ,function(err, updatedTransaction){
         if (err)
             res.redirect("/transactions");
         else
@@ -145,18 +145,63 @@ app.get("/budgets/new",function(req,res){
     res.render("newBudget");
 });
 
-app.post("/budgets",function(req,res){
+app.post("/budgets/new",function(req,res){
   //Make sure user input doesn't have script tags (may be malicious)
-  req.body.budget.body = req.sanitize(req.body.budget.name);
+  req.body.budget.name = req.sanitize(req.body.budget.name);
   //create budget
   Budget.create(req.body.budget, function(err,newBudget){
-      if (err)
+      if (err){
+          console.log(err);
           res.render("newBudget");
-      //redirect to index
-      else
-      res.redirect("/budgets");
+      }
+      //redirect to budget page
+      else{
+          res.render("budgets");
+      }
   });
 })
+
+//Show route
+app.get("/budgets/:id",function(req,res){
+    Budget.findById(req.params.id, function(err, foundBudget){
+        if (err)
+            res.redirect("/budgets");
+        else
+            res.render("showBudget",{budget: foundBudget});
+    });
+});
+
+//Edit route
+app.get("/budgets/:id/edit",function(req,res){
+    Budget.findById(req.params.id, function(err, foundBudget){
+        if (err)
+            res.redirect("/budgets");
+        else
+            res.render("editBudget",{budget: foundBudget});
+    });
+});
+
+//Update route
+app.put("/budgets/:id",function(req,res){
+    //Make sure user input doesn't have script tags (may be malicious)
+    req.body.budget.body = req.sanitize(req.body.budget.body);
+    Budget.findByIdAndUpdate(req.params.id, req.body.budget ,function(err, updatedBudget){
+        if (err)
+            res.redirect("/budgets");
+        else
+            res.redirect("/budgets" + req.params.id);
+    });
+});
+
+//Delete route
+app.delete("/budgets/:id",function(req,res){
+    Budget.findByIdAndRemove(req.params.id, function(err){
+        if (err)
+            res.redirect("/budgets");
+        else
+            res.redirect("/budgets");
+    });
+});
 
 app.listen(port, function(){
     console.log("App started on " + port);
