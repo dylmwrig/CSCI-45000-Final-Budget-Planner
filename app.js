@@ -42,8 +42,8 @@ var budgetSchema = new mongoose.Schema({
     name: String,
     amountConstraint: Number,
     startDate: {type: Date, default: Date.now},
-    endDate: {type: Date, default: Date.now}
-    //fixedCosts: [transactionSchema]
+    endDate: {type: Date, default: Date.now},
+    fixedCosts: [transactionSchema]
 });
 
 var Transaction = mongoose.model("Transaction", transactionSchema);

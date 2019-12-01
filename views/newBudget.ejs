@@ -19,8 +19,40 @@
                     <label>End Date</label>
                     <input required type="date" name="budget[endDate]" placeholder="End date">
                 </div>
+                <div id="fixedCostField">
+                    <div id="addRecurring">
+                        <a class="ui floated basic green button">
+                            Add Recurring Transaction
+                            <i class="right chevron icon"></i>
+                        </a>
+                    </div>
+                </div>
                 <input class="ui button" type="submit">
         </form>
 </div>
+<!--
+<label>Recurring Transactions (rent, bills, etc.)</label>
+<div class="field">
+    <label>Transaction Name</label>
+    <input required type="text" name="transaction[name]" placeholder="Transaction Name">
+</div>
+<div class="field">
+    <label>Amount</label>
+    <input type="number" name="transaction[amount]" placeholder="Value of transaction">
+</div>
+<div class="field">
+    <label>Category</label>
+    <input  type="text" name="transaction[category]" placeholder="Category">
+</div>
+<div class="field">
+    <label>Estimated Frequency</label>
+    <select>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="biWeekly">Bi-Weekly (every two weeks)</option>
+        <option value="monthly">Monthly</option>
+    </select>
+</div>
+-->
 
 <% include ./partials/footer %>
