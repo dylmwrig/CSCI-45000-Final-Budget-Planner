@@ -1,0 +1,26 @@
+<% include ./partials/header %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">New Budget</div>
+        <form class="ui form" action="/budgets" method="POST">
+                <div class="field">
+                    <label>Budget Name</label>
+                    <input required type="text" name="budget[name]" placeholder="Budget Name">
+                </div>
+                <div class="field">
+                    <label>Amount Constraint</label>
+                    <input required type="number" name="budget[amountConstraint]" placeholder="How much can you spend">
+                </div>
+                <div class="field">
+                    <label>Start Date</label>
+                    <input type="date" name="budget[startDate]" placeholder="Start date">
+                </div>
+                <div class="field">
+                    <label>End Date</label>
+                    <input type="date" name="transaction[endDate]" placeholder="End date">
+                </div>
+                <input class="ui button" type="submit">
+        </form>
+</div>
+
+<% include ./partials/footer %>

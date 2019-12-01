@@ -11,7 +11,7 @@ app = express();
 
 //For secure access to DB
 dotenv.config();
-var url = process.env.MONGOLAB_URI;
+var url = "mongodb+srv://oramadan:mQ9lYoCNPHmEddFr@cluster0-6hntz.mongodb.net/test?retryWrites=true&w=majority;"
 
 //DB setup
 mongoose.connect(url,
@@ -19,7 +19,7 @@ mongoose.connect(url,
     console.log("Connected to DB");
 }).catch(err => {
     console.log("ERROR", err.message);
-}); 
+});
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
@@ -38,7 +38,16 @@ var transactionSchema = new mongoose.Schema({
     created: {type: Date, default: Date.now}
 });
 
+var budgetSchema = new mongoose.Schema({
+    name: String,
+    amountConstraint: Number,
+    startDate: {type: Date, default: Date.now},
+    endDate: {type: Date, default: Date.now}
+    //fixedCosts: [transactionSchema]
+});
+
 var Transaction = mongoose.model("Transaction", transactionSchema);
+var Budget = mongoose.model("Budget", budgetSchema);
 
 //Home Page (redirects to transactions page)
 app.get("/",function(req,res){
@@ -53,7 +62,7 @@ app.get("/transactions",function(req,res){
             console.log("ERROR!");
         }
         else{
-            res.render("index",{transactions: transactions});  
+            res.render("index",{transactions: transactions});
         }
     });
 });
@@ -75,7 +84,6 @@ app.post("/transactions",function(req,res){
         else
         res.redirect("/transactions");
     });
- 
 });
 
 //Show route
@@ -121,6 +129,35 @@ app.delete("/transactions/:id",function(req,res){
     });
 });
 
+app.get('/budgets', function(req,res) {
+    Budget.find({}, function(err,budgets){
+          if (err){
+              console.log("ERROR!");
+          }
+          else{
+              res.render("budgets",{budgets: budgets});
+          }
+      });
+});
+
+//new
+app.get("/budgets/new",function(req,res){
+    res.render("newBudget");
+});
+
+app.post("/budgets",function(req,res){
+  //Make sure user input doesn't have script tags (may be malicious)
+  req.body.budget.body = req.sanitize(req.body.budget.name);
+  //create budget
+  Budget.create(req.body.budget, function(err,newBudget){
+      if (err)
+          res.render("newBudget");
+      //redirect to index
+      else
+      res.redirect("/budgets");
+  });
+})
+
 app.listen(port, function(){
     console.log("App started on " + port);
-}); 
+});
