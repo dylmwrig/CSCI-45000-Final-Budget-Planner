@@ -1,0 +1,23 @@
+<% include ./partials/header %>
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit: "<%=transaction.title%>"</div>
+        <form class="ui form" action="/transactions/<%= transaction._id %>?_method=PUT" method="POST">   
+                <div class="field">
+                    <label>Name</label>
+                    <input required type="text" name="transaction[name]" value="<%=transaction.name%>">
+                </div>
+                <label>Amount</label>
+                    <input required type="number" name="transaction[amount]" value="<%=transaction.amount%>">
+                
+                <label>Category</label>
+                    <input required type="text" name="transaction[category]" value="<%=transaction.category%>">
+                
+                <label>Date</label>
+                    <input required type="date" name="transaction[created]" value="<%=transaction.created%>">
+              
+                <input class="ui button" type="submit">
+            </div>
+        </form>
+</div>
+
+<% include ./partials/footer %>

@@ -1,0 +1,24 @@
+<% include ./partials/header %>
+<div class="ui main text container segment">
+    <div class="ui huge header"><%= transaction.name %></div>
+        <div class="ui top attached">
+            <div class="item">
+                <div class="amount">
+                    <p><span>Amount: &nbsp;$</span><%= transaction.amount %></p>
+                </div>
+                <div class="category">
+                    <p><span>Category: &nbsp;</span><%= transaction.category %></p>
+                </div>
+                <div class="date">
+                    <span>Date: <%= transaction.created.toDateString() %></span>
+                </div>
+                <a class="ui yellow basic button" href="/transactions/<%=transaction._id%>/edit">Edit</a>
+                <form id="delete" action="/transactions/<%=transaction._id%>?_method=DELETE" method="POST">
+                    <button class="ui red basic button">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>

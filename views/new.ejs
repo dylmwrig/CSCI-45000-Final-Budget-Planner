@@ -1,0 +1,25 @@
+<% include ./partials/header %>
+<div class="ui main text container segment">
+    <div class="ui huge header">New Transaction</div>
+        <form class="ui form" action="/transactions" method="POST">   
+                <div class="field">
+                    <label>Transaction Name</label>
+                    <input required type="text" name="transaction[name]" placeholder="Transaction Name">
+                </div>
+                <div class="field">
+                    <label>Amount</label>
+                    <input type="number" name="transaction[amount]" placeholder="Value of transaction">
+                </div>
+                <div class="field">
+                    <label>Category</label>
+                    <input  type="text" name="transaction[category]" placeholder="Category">
+                </div>
+                <div class="field">
+                    <label>Date</label>
+                    <input required type="date" name="transaction[created]" placeholder="Date of transaction">
+                </div>
+                <input class="ui button" type="submit">
+        </form>
+</div>
+
+<% include ./partials/footer %>
