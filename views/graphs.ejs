@@ -38,33 +38,68 @@
             });
         }
 
-        function makeBudgetChart(spendingValues, budgetValues, labels){
+        function makeBudgetChart(spendingValues, allConstraints, budgetNames, labels){
             var ctx = document.getElementById('transactionChart');
+            var budgetCount = 0;
+            var budgetValues = [];
+            var allConstraints2D = new Array(allConstraints.length);
+            var colors = ["#1966FF","#5CF713","#F8FF0E",
+                          "#D500FF","#FDA204","#CEDC00",
+                          "#257C38","#002A9C","#00DF8A"];
+
+            var x = new Array(spendingValues.length);
+            for (var i = 0; i < spendingValues.length; i++){
+                 x[i] = allConstraints[budgetCount];
+                 allConstraints2D[budgetCount] = x;
+            }
+
+            var maxValue = Math.max.apply(Math, allConstraints);
+            var label = 'Budget '.concat(budgetNames[budgetCount]);
             let lineChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                   labels: labels,
                   datasets: [{
                       label: 'Spending History',
-                      backgroundColor: 'rgb(255, 0, 100)',
                       borderColor: 'rgb(255, 0, 100)',
                       data: spendingValues},{
-                      label: 'Budget',
-                      backgroundColor: 'rgb(0, 0, 255)',
-                      borderColor: 'rgb(0, 0, 255)',
-                      data: budgetValues
+                      label: label,
+                      strokeColor: colors[budgetCount],
+                      borderColor: colors[budgetCount],
+                      data: allConstraints2D[0]
                   }]
                 },
                 options: {
                     scales: {
                       yAxes: [{
                         ticks: {
-                          suggestedMax: budgetValues[0] + budgetValues[0] / 4
+                            maxDataValue: maxValue
                         }
                       }]
                     }
                 }
             });
+
+            for (budgetCount = 1; budgetCount < allConstraints.length; budgetCount++){
+                label = 'Budget '.concat(budgetNames[budgetCount]);
+                if (budgetCount > colors.length){
+                    color = colors[budgetCount%5];
+                } else {
+                    color = colors[budgetCount];
+                }
+
+                var x = new Array(spendingValues.length);
+                for (var i = 0; i < spendingValues.length; i++){
+                     x[i] = allConstraints[budgetCount];
+                     allConstraints2D[budgetCount] = x;
+                }
+                lineChart.data.datasets.push({
+                    label: label,
+                    strokeColor: color,
+                    borderColor: colors[budgetCount],
+                    data: allConstraints2D[budgetCount]});
+                lineChart.update();
+            }
         }
 
         var allTransactions = <%- transactions %>;
@@ -72,19 +107,23 @@
 
         var b = allBudgets[0];
         var amountConstraint = b["amountConstraint"];
-        var constraintArr = [];
         var values = [];
         var names = [];
         var dates = [];
         var categories = [];
         var uniqueCategories = [];
         var fullSpending = [];
+        var allConstraints = [];
+        var budgetNames = [];
         var catValues = [0, 0, 0];
         var hasBudget = true;
 
         if (allBudgets.length == 0){
             hasBudget = false;
         }
+
+        allTransactions.sort(function(a, b){
+        return (new Date(a["created"]) - new Date(b["created"]))});
 
         for (var i = 0; i < allTransactions.length; i++){
             values.push(allTransactions[i]["amount"]);
@@ -107,7 +146,11 @@
             } else {
                 fullSpending.push(fullSpending[i-1] + values[i]);
             }
-            constraintArr.push(amountConstraint);
+        }
+
+        for (var i = 0; i < allBudgets.length; i++){
+            allConstraints.push(allBudgets[i]["amountConstraint"]);
+            budgetNames.push(allBudgets[i]["name"]);
         }
         makeChart(values, dates);
 
@@ -128,7 +171,7 @@
         var completeViewBtn = document.getElementById('completeViewBtn');
         completeViewBtn.addEventListener("click", function(){
             if (hasBudget){
-                makeBudgetChart(fullSpending, constraintArr, dates);
+                makeBudgetChart(fullSpending, allConstraints, budgetNames, dates);
             } else {
                 makeChart(fullSpending, dates);
               }
