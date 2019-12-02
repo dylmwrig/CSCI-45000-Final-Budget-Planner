@@ -115,7 +115,7 @@ app.get("/transactions/:id/edit",function(req,res){
 app.put("/transactions/:id",function(req,res){
     //Make sure user input doesn't have script tags (may be malicious)
     req.body.transaction.name = req.sanitize(req.body.transaction.name);
-    Transaction.findByIdAndUpdate(req.params.id, req.name.transaction ,function(err, updatedTransaction){
+    Transaction.findByIdAndUpdate(req.params.id, req.body.transaction ,function(err, updatedTransaction){
         if (err)
             res.redirect("/transactions");
         else
@@ -189,7 +189,7 @@ app.get("/budgets/:id/edit",function(req,res){
 app.put("/budgets/:id",function(req,res){
     //Make sure user input doesn't have script tags (may be malicious)
     //req.body.budget.body = req.sanitize(req.body.budget.body);
-    Budget.findByIdAndUpdate(req.params.id, req.name.budget ,function(err, updatedBudget){
+    Budget.findByIdAndUpdate(req.params.id, req.body.budget ,function(err, updatedBudget){
         if (err)
             res.redirect("/budgets");
         else
