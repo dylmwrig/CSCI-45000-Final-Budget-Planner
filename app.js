@@ -43,7 +43,11 @@ var budgetSchema = new mongoose.Schema({
     amountConstraint: Number,
     startDate: {type: Date, default: Date.now},
     endDate: {type: Date, default: Date.now},
-    fixedCosts: [transactionSchema]
+    fixedCosts:[ 
+            {
+                name: String,
+                amount: Number
+            }]
 });
 
 var Transaction = mongoose.model("Transaction", transactionSchema);
@@ -184,12 +188,15 @@ app.get("/budgets/:id/edit",function(req,res){
 //Update route
 app.put("/budgets/:id",function(req,res){
     //Make sure user input doesn't have script tags (may be malicious)
-    req.body.budget.body = req.sanitize(req.body.budget.body);
-    Budget.findByIdAndUpdate(req.params.id, req.body.budget ,function(err, updatedBudget){
+    //req.body.budget.body = req.sanitize(req.body.budget.body);
+    Budget.findByIdAndUpdate(req.params.id, req.name.budget ,function(err, updatedBudget){
         if (err)
             res.redirect("/budgets");
         else
+        {
+            console.log(req.params.body.amountConstraint);
             res.redirect("/budgets" + req.params.id);
+        }
     });
 });
 
