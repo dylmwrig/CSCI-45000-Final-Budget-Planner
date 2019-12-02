@@ -5,12 +5,16 @@
         <div>
             <canvas id="transactionChart" width="400" height="400"></canvas>
             <div class="options">
-              <button id="dateViewBtn" class="ui floated basic violet button">
-                  View by Date
-                  <i class="right chevron icon"></i>
-              </button>
+                <button id="dateViewBtn" class="ui floated basic violet button">
+                    View by Date
+                    <i class="right chevron icon"></i>
+                </button>
                 <button id="catViewBtn" class="ui floated basic violet button">
                     View by Category
+                    <i class="right chevron icon"></i>
+                </button>
+                <button id="completeViewBtn" class="ui floated basic violet button">
+                    View total spending
                     <i class="right chevron icon"></i>
                 </button>
             </div>
@@ -22,24 +26,31 @@
             var ctx = document.getElementById('transactionChart');
             let lineChart = new Chart(ctx, {
                 type: 'line',
+                fill: false,
                 data: {
                 labels: labels,
                 datasets: [{
                     label: 'Spending History',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 0, 100)',
                     data: values
                 }]}
             });
         }
 
         var allTransactions = <%- transactions %>;
+        var allBudgets = <%- budgets %>;
         var values = [];
         var names = [];
         var dates = [];
         var categories = [];
         var uniqueCategories = [];
+        var chronologicalSpending = [];
         var catValues = [0, 0, 0];
+        var hasBudget = true;
+
+        if (allBudgets.length == 0){
+            hasBudget = false;
+        }
 
         for (var i = 0; i < allTransactions.length; i++){
             values.push(allTransactions[i]["amount"]);
@@ -61,14 +72,31 @@
             catValues[uniqueCategories.indexOf(categories[i])] += values[i];
         }
 
+        //TODO Delete
+        hasBudget = false;
+        chronologicalSpending.push(values[0]);
+
+        if (!hasBudget){
+            for (var i = 0; i < values.length; i++){
+                  if (i > 0){
+                      chronologicalSpending.push(chronologicalSpending[i-1] + values[i]);
+                  }
+            }
+        }
+
         var dateViewBtn = document.getElementById('dateViewBtn');
         dateViewBtn.addEventListener("click", function(){
             makeChart(values, dates);
-        })
+        });
 
         var catViewBtn = document.getElementById('catViewBtn');
         catViewBtn.addEventListener("click", function(){
             makeChart(catValues, uniqueCategories);
+        });
+
+        var completeViewBtn = document.getElementById('completeViewBtn');
+        completeViewBtn.addEventListener("click", function(){
+            makeChart(chronologicalSpending, dates);
         });
       </script>
 

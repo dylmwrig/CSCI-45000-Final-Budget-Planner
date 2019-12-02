@@ -44,7 +44,7 @@ var budgetSchema = new mongoose.Schema({
     amountConstraint: Number,
     startDate: {type: Date, default: Date.now},
     endDate: {type: Date, default: Date.now},
-    fixedCosts:[ 
+    fixedCosts:[
             {
                 name: String,
                 amount: Number
@@ -217,7 +217,10 @@ app.get("/graphs",function(req,res){
             console.log("ERROR!");
         }
         else{
-            res.render("graphs",{transactions: JSON.stringify(transactions)});
+            Budget.find({}, function(err2, budgets){
+                res.render("graphs",{transactions: JSON.stringify(transactions),
+                                     budgets: JSON.stringify(budgets)});
+            })
         }
     });
 });
