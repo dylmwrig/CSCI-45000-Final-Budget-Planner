@@ -6,7 +6,8 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var expressSanitizer = require("express-sanitizer");
 var dotenv = require("dotenv");
-//var chart = require("chart.js");
+var assert = require('assert');
+const AssertionError = require('assert').AssertionError;
 var port = parseInt(process.env.PORT,10) || 3000;
 app = express();
 
@@ -153,17 +154,26 @@ app.get("/budgets/new",function(req,res){
 app.post("/budgets/new",function(req,res){
   //Make sure user input doesn't have script tags (may be malicious)
   req.body.budget.name = req.sanitize(req.body.budget.name);
-  //create budget
-  Budget.create(req.body.budget, function(err,newBudget){
-      if (err){
-          console.log(err);
-          res.render("newBudget");
-      }
-      //redirect to budget page
-      else{
-          res.redirect("/budgets");
-      }
-  });
+  
+  var input = req.body.budget;
+
+  // Check if both fields have been filled in
+  if(input.endDate  <= input.startDate){
+      res.render('newBudget', { error: 'Please ensure end date is after start date'});
+  }
+  else{
+        //create budget
+        Budget.create(req.body.budget, function(err,newBudget){
+            if (err){
+                
+                res.render("newBudget");
+            }
+            //redirect to budget page
+            else{
+                res.redirect("/budgets");
+            }
+        });
+    }
 })
 
 //Show route
@@ -188,17 +198,21 @@ app.get("/budgets/:id/edit",function(req,res){
 
 //Update route
 app.put("/budgets/:id",function(req,res){
-    //Make sure user input doesn't have script tags (may be malicious)
-    //req.body.budget.body = req.sanitize(req.body.budget.body);
    
-    console.log(req.body.budget);
-    console.log(req.params.id);
-    Budget.findByIdAndUpdate(req.params.id, req.body.budget ,function(err, updatedBudget){
-        if (err)
-            res.redirect("/budgets");
-        else
-            res.redirect("/budgets/" + req.params.id);
-    });
+    var input = req.body.budget;
+
+    if(input.endDate<= input.startDate){
+        res.redirect("/budgets");
+    }
+    else{
+        Budget.findByIdAndUpdate(req.params.id, req.body.budget ,{new: true},function(err, updatedBudget){
+            if (err)
+                res.redirect("/budgets");
+            else
+                res.redirect("/budgets/" + req.params.id);
+        });
+    }
+
 });
 
 //Delete route

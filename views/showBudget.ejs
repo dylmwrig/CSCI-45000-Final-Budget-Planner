@@ -28,6 +28,33 @@
                 <% i++;
                     })%> 
                 </div>
+                <div class="calculation">
+                <%
+                        var bud = budget.amountConstraint;
+
+                        budget.fixedCosts.forEach(function(fc)
+                        {
+                            bud -= fc.amount;
+                        }) 
+                        
+                        var ed = budget.endDate.getTime();
+                        var sd = budget.startDate.getTime();
+
+                        ed = (ed)/(1000*3600*24);
+                        sd = (sd)/(1000*3600*24);
+
+                        var days = ed - sd;
+
+                        var perday = bud/days;
+                        perday = perday.toFixed(2);
+
+                        var perweek = (7*bud)/(days);
+                        perweek = perweek.toFixed(2);
+                %>
+                <span>After subtracting your fixed costs, you are left with<strong> $<%=bud%></strong> for the period of your budget.</span>
+                <br>
+                <span>That is approximately <strong>$<%=perday%>/day </strong> or <strong>$<%=perweek%>/week</strong>! </span>
+            </div>
                 <a class="ui yellow basic button" href="/budgets/<%=budget._id%>/edit">Edit</a>
                 <form id="delete" action="/budgets/<%=budget._id%>?_method=DELETE" method="POST">
                     <button class="ui red basic button">Delete</button>

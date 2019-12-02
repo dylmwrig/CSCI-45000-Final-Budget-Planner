@@ -10,7 +10,15 @@
                     <input required type="number" name="transaction[amount]" value="<%=transaction.amount%>">
                 
                 <label>Category</label>
-                    <input required type="text" name="transaction[category]" value="<%=transaction.category%>">
+                <label>Category</label>
+                    <select name="transaction[category]" value="<%=transaction.category%>">
+                            <option value="Rent & utilities">Rent & utilities</option>
+                            <option value="Groceries">Groceries</option>
+                            <option value="Dining">Dining</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Travel & lodging">Travel & lodging</option>
+                            <option value="Other">Other</option>
+                          </select>
                 
                 <label>Date</label>
                     <input required type="date" name="transaction[created]" value="<%=transaction.created%>">

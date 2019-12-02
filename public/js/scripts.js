@@ -12,8 +12,7 @@ $(document).ready(function()
         '<input type="number" class ="textsize" placeholder="Value of Transaction"'
         +
         'name="budget[fixedCosts][' + count.toString() + '][amount]">'
-        +
-        '<button type="button" class="ui red button butsize remove num' + count.toString() + '">Remove</button>' + '</p>');
+         + '</p>');
 
 
 
