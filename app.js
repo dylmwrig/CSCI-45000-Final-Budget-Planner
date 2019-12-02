@@ -12,7 +12,7 @@ app = express();
 
 //For secure access to DB
 dotenv.config();
-var url = "mongodb+srv://oramadan:mQ9lYoCNPHmEddFr@cluster0-6hntz.mongodb.net/test?retryWrites=true&w=majority;"
+var url = "mongodb+srv://oramadan:mQ9lYoCNPHmEddFr@cluster0-6hntz.mongodb.net/test?retryWrites=true&w=majority"
 
 //DB setup
 mongoose.connect(url,
@@ -191,12 +191,15 @@ app.put("/budgets/:id",function(req,res){
     //Make sure user input doesn't have script tags (may be malicious)
     //req.body.budget.body = req.sanitize(req.body.budget.body);
     Budget.findByIdAndUpdate(req.params.id, req.body.budget ,function(err, updatedBudget){
-        if (err)
+        if (err){
+            console.log(req.params.id);
+            console.log(req.body.budget.fixedCosts); 
             res.redirect("/budgets");
+        }
+           
         else
         {
-            console.log(req.params.body.amountConstraint);
-            res.redirect("/budgets" + req.params.id);
+            res.redirect("/budgets/" + req.params.id);
         }
     });
 });
