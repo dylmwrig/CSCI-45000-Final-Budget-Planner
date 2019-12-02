@@ -6,7 +6,7 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var expressSanitizer = require("express-sanitizer");
 var dotenv = require("dotenv");
-var chart = require("chart.js");
+//var chart = require("chart.js");
 var port = parseInt(process.env.PORT,10) || 3000;
 app = express();
 
