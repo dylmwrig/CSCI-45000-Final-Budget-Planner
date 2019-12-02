@@ -14,7 +14,17 @@
 
             <label>End Date</label>
                 <input required type="date" name="budget[endDate]" value="<%=budget.endDate%>">
-
+            
+            <label>Fixed Costs</label>
+            <br>  
+            <% 
+                var i = 0;
+                budget.fixedCosts.forEach(function(fc){ %>
+            <input required type="text" style="width: 40%;" name="budget[fixedCosts]<%=[i]%>[name]" value="<%=fc.name%>">
+            <input required type="number" style="width: 40%;" name="budget[fixedCosts]<%=[i]%>[name]" value="<%=fc.amount%>">
+            <% i++;
+                })%>   
+            <br>  
             <input class="ui button" type="submit">
     </form>
 </div>

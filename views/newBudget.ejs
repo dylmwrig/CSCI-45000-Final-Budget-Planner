@@ -19,17 +19,26 @@
                     <label>End Date</label>
                     <input required type="date" name="budget[endDate]" placeholder="End date">
                 </div>
-                <div id="fixedCostField">
-                    <div id="addRecurring">
-                        <a class="ui floated basic green button">
-                            Add Recurring Transaction
-                            <i class="right chevron icon"></i>
-                        </a>
-                    </div>
+                <!--<input type="button" class="ui floated basic green button" name="button" value="Add Fixed Cost" onclick="onButtonClick()" />-->
+               
+               <div id="fixedTransContainer"> 
+                   <button type="button" id="FTbut" class="ui green button fixedTrans">Add Fixed Transaction</button>
+               
                 </div>
-                <input class="ui button" type="submit">
+                <input class="ui button" id="budgetSubmit" type="submit">
         </form>
 </div>
+
+<!--
+
+<div id="fixedCostField">
+    <div id="addRecurring">
+        <a class="ui floated basic green button">
+            Add Fixed Cost
+            <i class="right chevron icon"></i>
+        </a>
+    </div>
+</div>-->
 <!--
 <label>Recurring Transactions (rent, bills, etc.)</label>
 <div class="field">
