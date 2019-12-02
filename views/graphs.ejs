@@ -38,14 +38,47 @@
             });
         }
 
+        function makeBudgetChart(spendingValues, budgetValues, labels){
+            var ctx = document.getElementById('transactionChart');
+            let lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                  labels: labels,
+                  datasets: [{
+                      label: 'Spending History',
+                      backgroundColor: 'rgb(255, 0, 100)',
+                      borderColor: 'rgb(255, 0, 100)',
+                      data: spendingValues},{
+                      label: 'Budget',
+                      backgroundColor: 'rgb(0, 0, 255)',
+                      borderColor: 'rgb(0, 0, 255)',
+                      data: budgetValues
+                  }]
+                },
+                options: {
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          suggestedMax: budgetValues[0] + budgetValues[0] / 4
+                        }
+                      }]
+                    }
+                }
+            });
+        }
+
         var allTransactions = <%- transactions %>;
         var allBudgets = <%- budgets %>;
+
+        var b = allBudgets[0];
+        var amountConstraint = b["amountConstraint"];
+        var constraintArr = [];
         var values = [];
         var names = [];
         var dates = [];
         var categories = [];
         var uniqueCategories = [];
-        var chronologicalSpending = [];
+        var fullSpending = [];
         var catValues = [0, 0, 0];
         var hasBudget = true;
 
@@ -61,28 +94,25 @@
             outDate = monthDate.concat('-',year);
             dates.push(outDate);
 
+            //category view stuff
             cat = allTransactions[i]["category"];
             categories.push(cat);
             if (!uniqueCategories.includes(cat)){
                 uniqueCategories.push(cat);
             }
+
+            //full view stuff
+            if (i == 0){
+                fullSpending.push(values[0]);
+            } else {
+                fullSpending.push(fullSpending[i-1] + values[i]);
+            }
+            constraintArr.push(amountConstraint);
         }
         makeChart(values, dates);
 
         for (var i = 0; i < categories.length; i++){
             catValues[uniqueCategories.indexOf(categories[i])] += values[i];
-        }
-
-        //TODO Delete
-        hasBudget = false;
-        chronologicalSpending.push(values[0]);
-
-        if (!hasBudget){
-            for (var i = 0; i < values.length; i++){
-                  if (i > 0){
-                      chronologicalSpending.push(chronologicalSpending[i-1] + values[i]);
-                  }
-            }
         }
 
         var dateViewBtn = document.getElementById('dateViewBtn');
@@ -97,7 +127,11 @@
 
         var completeViewBtn = document.getElementById('completeViewBtn');
         completeViewBtn.addEventListener("click", function(){
-            makeChart(chronologicalSpending, dates);
+            if (hasBudget){
+                makeBudgetChart(fullSpending, constraintArr, dates);
+            } else {
+                makeChart(fullSpending, dates);
+              }
         });
       </script>
 
