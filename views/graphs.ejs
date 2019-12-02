@@ -5,18 +5,43 @@
     <div class="ui huge header">Spending History</div>
         <div>
             <canvas id="transactionChart" width="400" height="400"></canvas>
-
-
+            <div class="options">
+              <button id="dateViewBtn" class="ui floated basic violet button">
+                  View by Date
+                  <i class="right chevron icon"></i>
+              </button>
+                <button id="catViewBtn" class="ui floated basic violet button">
+                    View by Category
+                    <i class="right chevron icon"></i>
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
+        function makeChart(values, labels){
+            var ctx = document.getElementById('transactionChart');
+            let lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Spending History',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: values
+                }]}
+            });
+        }
+
         var allTransactions = <%- transactions %>;
         var values = [];
         var names = [];
         var dates = [];
+        var categories = [];
+        var uniqueCategories = [];
+        var catValues = [0, 0, 0];
 
-        console.log(allTransactions[0]);
         for (var i = 0; i < allTransactions.length; i++){
             values.push(allTransactions[i]["amount"]);
             names.push(allTransactions[i]["name"]);
@@ -24,22 +49,28 @@
             year = allTransactions[i]["created"].slice(2,4);
             outDate = monthDate.concat('-',year);
             dates.push(outDate);
+
+            cat = allTransactions[i]["category"];
+            categories.push(cat);
+            if (!uniqueCategories.includes(cat)){
+                uniqueCategories.push(cat);
+            }
+        }
+        makeChart(values, dates);
+
+        for (var i = 0; i < categories.length; i++){
+            catValues[uniqueCategories.indexOf(categories[i])] += values[i];
         }
 
-        console.log(typeof(dates[0]));
+        var dateViewBtn = document.getElementById('dateViewBtn');
+        dateViewBtn.addEventListener("click", function(){
+            makeChart(values, dates);
+        })
 
-        var ctx = document.getElementById('transactionChart');
-        let lineChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-            labels: dates,
-            datasets: [{
-                label: 'Spending History',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: values
-            }]}
+        var catViewBtn = document.getElementById('catViewBtn');
+        catViewBtn.addEventListener("click", function(){
+            makeChart(catValues, uniqueCategories);
         });
-        </script>
+      </script>
 
 <% include ./partials/footer %>

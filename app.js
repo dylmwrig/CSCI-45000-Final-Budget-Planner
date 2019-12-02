@@ -205,14 +205,14 @@ app.delete("/budgets/:id",function(req,res){
 });
 
 app.get("/graphs",function(req,res){
-  Transaction.find({}, function(err,transactions){
-      if (err){
-          console.log("ERROR!");
-      }
-      else{
-          res.render("graphs",{transactions: JSON.stringify(transactions)});
-      }
-  });
+    Transaction.find({}, function(err,transactions){
+        if (err){
+            console.log("ERROR!");
+        }
+        else{
+            res.render("graphs",{transactions: JSON.stringify(transactions)});
+        }
+    });
 });
 
 app.listen(port, function(){
