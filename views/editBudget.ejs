@@ -20,7 +20,7 @@
             <% 
                 var i = 0;
                 budget.fixedCosts.forEach(function(fc){ %>
-            <input required type="text" style="width: 40%;" name="budget[fixedCosts]<%=[i]%>[name]" value="<%=fc.name%>">
+            <input required type="text" style="width: 40%;" name="budget[fixedCosts]<%=[i]%>[description]" value="<%=fc.description%>">
             <input required type="number" style="width: 40%;" name="budget[fixedCosts]<%=[i]%>[amount]" value="<%=fc.amount%>">
             <% i++;
                 })%>   

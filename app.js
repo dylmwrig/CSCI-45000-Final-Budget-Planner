@@ -46,7 +46,7 @@ var budgetSchema = new mongoose.Schema({
     endDate: {type: Date, default: Date.now},
     fixedCosts:[
             {
-                name: String,
+                description: String,
                 amount: Number
             }]
 });
@@ -161,7 +161,7 @@ app.post("/budgets/new",function(req,res){
       }
       //redirect to budget page
       else{
-          res.render("budgets");
+          res.redirect("/budgets");
       }
   });
 })
@@ -190,17 +190,14 @@ app.get("/budgets/:id/edit",function(req,res){
 app.put("/budgets/:id",function(req,res){
     //Make sure user input doesn't have script tags (may be malicious)
     //req.body.budget.body = req.sanitize(req.body.budget.body);
+   
+    console.log(req.body.budget);
+    console.log(req.params.id);
     Budget.findByIdAndUpdate(req.params.id, req.body.budget ,function(err, updatedBudget){
-        if (err){
-            console.log(req.params.id);
-            console.log(req.body.budget.fixedCosts); 
+        if (err)
             res.redirect("/budgets");
-        }
-           
         else
-        {
             res.redirect("/budgets/" + req.params.id);
-        }
     });
 });
 

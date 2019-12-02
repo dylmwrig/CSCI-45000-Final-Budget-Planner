@@ -7,7 +7,7 @@ $(document).ready(function()
 
         $("#fixedTransContainer").append('<p> <input type="text" '
         + 
-        'name="budget[fixedCosts][' + count.toString() + '][name]" class ="textsize" placeholder="Name of Transaction">' 
+        'name="budget[fixedCosts][' + count.toString() + '][description]" class ="textsize" placeholder="Name of Transaction">' 
         + 
         '<input type="number" class ="textsize" placeholder="Value of Transaction"'
         +

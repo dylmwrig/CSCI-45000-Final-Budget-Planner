@@ -9,13 +9,13 @@
                     <div class="content">
                         <span class="header">Transaction Name: &nbsp;</span><a class="header" href="/transactions/<%=transaction._id%>" ><%=transaction.name%></a>
                         <div class="amount">
-                                <p><span>Amount: &nbsp;$</span><%- transaction.amount %></p>
+                                <p><span><strong>Amount:</strong> &nbsp;$</span><%- transaction.amount %></p>
                             </div>
-                        <div class="meta">
-                            <span>Date: <%= transaction.created.toDateString() %></span>
+                        <div class="date">
+                            <span><strong>Date: </strong><%= transaction.created.toDateString() %></span>
                         </div>
                         <div class="category">
-                            <p><span>Category: &nbsp;</span><%- transaction.category %></p>
+                            <p><span><strong>Category: </strong>&nbsp;</span><%- transaction.category %></p>
                         </div>
                         <div class="extra">
                             <a href="/transactions/<%=transaction._id%>" class="ui floated basic violet button">

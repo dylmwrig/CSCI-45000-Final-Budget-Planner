@@ -4,16 +4,29 @@
         <div class="ui top attached">
             <div class="item">
                 <div class="name">
-                    <p><span>Name: &nbsp;</span><%= budget.name %></p>
+                    <p><span><strong>Name:</strong> &nbsp;</span><%= budget.name %></p>
                 </div>
                 <div class="amountConstraint">
-                    <p><span>Total Amount Constraint: &nbsp;$</span><%= budget.amountConstraint %></p>
+                    <p><span><strong> Amount Constraint:</strong> &nbsp;$</span><%= budget.amountConstraint %></p>
                 </div>
                 <div class="startDate">
-                    <span>Start Date: <%= budget.startDate.toDateString() %></span>
+                    <span><strong>Start Date:</strong> <%= budget.startDate.toDateString() %></span>
                 </div>
                 <div class="endDate">
-                    <span>End Date: <%= budget.endDate.toDateString() %></span>
+                    <span><strong>End Date: </strong><%= budget.endDate.toDateString() %></span>
+                </div>
+                <div class="fixedCosts">
+                <label><strong>Fixed Costs:</strong></label>
+                <br>  
+                <% 
+                    var i = 0;
+                    budget.fixedCosts.forEach(function(fc){ %>
+                    <span> <%= i+1 %>.</span>
+                    <span style="padding-right: 20px;"> Name: <%= budget.fixedCosts[i].description %></span>
+                    <span> Amount: $<%= budget.fixedCosts[i].amount %></span>
+                    <br>
+                <% i++;
+                    })%> 
                 </div>
                 <a class="ui yellow basic button" href="/budgets/<%=budget._id%>/edit">Edit</a>
                 <form id="delete" action="/budgets/<%=budget._id%>?_method=DELETE" method="POST">
