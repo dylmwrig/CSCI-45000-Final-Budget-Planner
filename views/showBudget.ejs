@@ -28,6 +28,7 @@
                 <% i++;
                     })%> 
                 </div>
+                <br>
                 <div class="calculation">
                 <%
                         var bud = budget.amountConstraint;
@@ -55,6 +56,7 @@
                 <br>
                 <span>That is approximately <strong>$<%=perday%>/day </strong> or <strong>$<%=perweek%>/week</strong>! </span>
             </div>
+            <br>
                 <a class="ui yellow basic button" href="/budgets/<%=budget._id%>/edit">Edit</a>
                 <form id="delete" action="/budgets/<%=budget._id%>?_method=DELETE" method="POST">
                     <button class="ui red basic button">Delete</button>
