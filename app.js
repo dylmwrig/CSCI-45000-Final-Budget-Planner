@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var expressSanitizer = require("express-sanitizer");
 var dotenv = require("dotenv");
+var chart = require("chart.js");
 var port = parseInt(process.env.PORT,10) || 3000;
 app = express();
 
@@ -207,6 +208,17 @@ app.delete("/budgets/:id",function(req,res){
             res.redirect("/budgets");
         else
             res.redirect("/budgets");
+    });
+});
+
+app.get("/graphs",function(req,res){
+    Transaction.find({}, function(err,transactions){
+        if (err){
+            console.log("ERROR!");
+        }
+        else{
+            res.render("graphs",{transactions: JSON.stringify(transactions)});
+        }
     });
 });
 
