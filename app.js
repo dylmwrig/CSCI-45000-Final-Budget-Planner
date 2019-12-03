@@ -75,7 +75,7 @@ app.get("/transactions",function(req,res){
 
 //new transaction page
 app.get("/transactions/new",function(req,res){
-    res.render("new");
+    res.render("newTransaction");
 });
 
 //create route
@@ -92,7 +92,7 @@ app.post("/transactions",function(req,res){
     Transaction.create(req.body.transaction, function(err,newTransaction){
         //If error, render new transaction page again
         if (err)
-            res.render("new");
+            res.render("newTransaction");
         //redirect to index
         else
         res.redirect("/transactions");
@@ -107,7 +107,7 @@ app.get("/transactions/:id",function(req,res){
             res.redirect("/transactions");
         else
         //Display the transaction that was found
-            res.render("show",{transaction: foundTransaction});
+            res.render("showTransaction",{transaction: foundTransaction});
     });
 });
 
@@ -118,7 +118,7 @@ app.get("/transactions/:id/edit",function(req,res){
         if (err)
             res.redirect("/transactions");
         else
-            res.render("edit",{transaction: foundTransaction});
+            res.render("editTransaction",{transaction: foundTransaction});
     });
 });
 
@@ -170,7 +170,7 @@ app.get("/budgets/new",function(req,res){
 app.post("/budgets/new",function(req,res){
   //Make sure user input doesn't have script tags (may be malicious)
   req.body.budget.name = req.sanitize(req.body.budget.name);
-  
+
   var input = req.body.budget;
 
   // Validation for start and end dates
@@ -181,7 +181,7 @@ app.post("/budgets/new",function(req,res){
         //create budget
         Budget.create(req.body.budget, function(err,newBudget){
             if (err){
-                
+
                 res.render("newBudget");
             }
             //redirect to budget page
@@ -214,7 +214,7 @@ app.get("/budgets/:id/edit",function(req,res){
 
 //Update route
 app.put("/budgets/:id",function(req,res){
-   
+
     var input = req.body.budget;
 
     //Validation
