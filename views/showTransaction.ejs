@@ -12,10 +12,13 @@
                 <div class="date">
                     <span><strong>Date:</strong> <%= transaction.created.toDateString() %></span>
                 </div>
+                <div style="margin-top: 10px;">
                 <a class="ui yellow basic button" href="/transactions/<%=transaction._id%>/edit">Edit</a>
                 <form id="delete" action="/transactions/<%=transaction._id%>?_method=DELETE" method="POST">
                     <button class="ui red basic button">Delete</button>
+                    
                 </form>
+                </div>
             </div>
         </div>
     </div>

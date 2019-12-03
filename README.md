@@ -1,6 +1,6 @@
 # budgetPlannerV2
 
-Visit the following link to view this app: https://budgetplannerv1.herokuapp.com/
+Visit this [link](https://budgetplannerv1.herokuapp.com/) to view this app. 
 
 To run this application, you must install node package module (npm). Use the this [link](https://www.npmjs.com/get-npm) to download/install. 
 
