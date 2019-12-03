@@ -12,6 +12,7 @@ function makeChart(values, labels){
             data: values
         }]}
     });
+    return lineChart;
 }
 
 function makeBudgetChart(spendingValues, allConstraints, budgetNames, labels){
@@ -76,6 +77,7 @@ function makeBudgetChart(spendingValues, allConstraints, budgetNames, labels){
             data: allConstraints2D[budgetCount]});
         lineChart.update();
     }
+    return lineChart;
 }
 
 var allTransactions = document.getElementById('transactionContainer').textContent;
@@ -132,7 +134,7 @@ for (var i = 0; i < allBudgets.length; i++){
     allConstraints.push(allBudgets[i]["amountConstraint"]);
     budgetNames.push(allBudgets[i]["name"]);
 }
-makeChart(values, dates);
+var chart = makeChart(values, dates);
 
 var catValues = new Array(uniqueCategories.length);
 
@@ -147,19 +149,22 @@ for (var i = 0; i < categories.length; i++){
 
 var dateViewBtn = document.getElementById('dateViewBtn');
 dateViewBtn.addEventListener("click", function(){
-    makeChart(values, dates);
+    chart.destroy();
+    chart = makeChart(values, dates);
 });
 
 var catViewBtn = document.getElementById('catViewBtn');
 catViewBtn.addEventListener("click", function(){
-    makeChart(catValues, uniqueCategories);
+    chart.destroy();
+    chart = makeChart(catValues, uniqueCategories);
 });
 
 var completeViewBtn = document.getElementById('completeViewBtn');
 completeViewBtn.addEventListener("click", function(){
+    chart.destroy();
     if (hasBudget){
-        makeBudgetChart(fullSpending, allConstraints, budgetNames, dates);
+        chart = makeBudgetChart(fullSpending, allConstraints, budgetNames, dates);
     } else {
-        makeChart(fullSpending, dates);
+        chart = makeChart(fullSpending, dates);
       }
 });
