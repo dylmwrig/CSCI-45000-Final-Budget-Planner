@@ -17,16 +17,26 @@
                 </div>
                 <div class="fixedCosts">
                 <label><strong>Fixed Costs:</strong></label>
-                <br>  
+                  
                 <% 
-                    var i = 0;
-                    budget.fixedCosts.forEach(function(fc){ %>
-                    <span> <%= i+1 %>.</span>
-                    <span style="padding-right: 20px;"> Name: <%= budget.fixedCosts[i].description %></span>
-                    <span> Amount: $<%= budget.fixedCosts[i].amount %></span>
-                    <br>
-                <% i++;
-                    })%> 
+                    if (budget.fixedCosts.length == 0)
+                    {
+                        %> <span> None</span> <%
+                    }
+                    else
+                    {
+                        %> <br> <%
+                        var i = 0;
+                        budget.fixedCosts.forEach(function(fc){ %>
+                        
+                        <span> <%= i+1 %>.</span>
+                        <span style="padding-right: 20px;"> Name: <%= budget.fixedCosts[i].description %></span>
+                        <span> Amount: $<%= budget.fixedCosts[i].amount %></span>
+                        <br>
+                    <% i++;
+                        }) 
+                    }%>
+
                 </div>
                 <br>
                 <div class="calculation">

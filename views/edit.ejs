@@ -1,6 +1,6 @@
 <% include ./partials/header %>
 <div class="ui main text container segment">
-    <div class="ui huge header">Edit: "<%=transaction.title%>"</div>
+    <div class="ui huge header">Edit: "<%=transaction.name%>"</div>
         <form class="ui form" action="/transactions/<%= transaction._id %>?_method=PUT" method="POST">   
                 <div class="field">
                     <label>Name</label>
@@ -9,7 +9,6 @@
                 <label>Amount</label>
                     <input required type="number" name="transaction[amount]" value="<%=transaction.amount%>">
                 
-                <label>Category</label>
                 <label>Category</label>
                     <select name="transaction[category]" value="<%=transaction.category%>">
                             <option value="Rent & utilities">Rent & utilities</option>
@@ -21,9 +20,14 @@
                           </select>
                 
                 <label>Date</label>
-                    <input required type="date" name="transaction[created]" value="<%=transaction.created%>">
-              
-                <input class="ui button" type="submit">
+                <%
+                    var d = new Date(transaction.created);
+                    var dString = d.toISOString().split('T')[0]
+                %>
+                    <input required type="date" name="transaction[created]" value="<%=dString%>">
+                <div>
+                    <input class="ui button" type="submit">
+                </div>
             </div>
         </form>
 </div>
