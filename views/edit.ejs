@@ -10,7 +10,6 @@
                     <input required type="number" name="transaction[amount]" value="<%=transaction.amount%>">
                 
                 <label>Category</label>
-                <label>Category</label>
                     <select name="transaction[category]" value="<%=transaction.category%>">
                             <option value="Rent & utilities">Rent & utilities</option>
                             <option value="Groceries">Groceries</option>
@@ -26,8 +25,9 @@
                     var dString = d.toISOString().split('T')[0]
                 %>
                     <input required type="date" name="transaction[created]" value="<%=dString%>">
-              
-                <input class="ui button" type="submit">
+                <div>
+                    <input class="ui button" type="submit">
+                </div>
             </div>
         </form>
 </div>
