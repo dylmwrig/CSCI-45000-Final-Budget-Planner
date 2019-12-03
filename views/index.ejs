@@ -4,6 +4,8 @@
     <div class="ui huge header">Budget Calculator</div>
     <div class="ui top attached segment">
         <div class="ui divided items">
+            <% transactions.sort(function(a, b){ %>
+                  <%  return (new Date(a["created"]) - new Date(b["created"]))}); %>
             <% transactions.forEach(function(transaction){ %>
                 <div class="item">
                     <div class="content">
@@ -18,7 +20,6 @@
                             <p><span><strong>Category: </strong>&nbsp;</span><%- transaction.category %></p>
                         </div>
                         <div class="extra">
-
                             <div id="chevronButton">
                                 <a href="/transactions/<%=transaction._id%>" class="ui floated basic violet button">
                                 Read More
