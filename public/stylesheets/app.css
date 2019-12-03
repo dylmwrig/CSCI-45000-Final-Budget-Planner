@@ -6,15 +6,57 @@ i.icon{
     margin-top: 5em;
 }
 
+
+#readButton{
+    margin: 0;
+    padding: 0;
+}
+
+#readButton a{
+    padding: 10;
+    padding-right: 0;
+    height: inherit;
+    width: inherit;
+}
+
+#readButton i{
+    height: 100%;
+    margin: 0;
+}
+
+#readText{
+    display: inline-block;
+}
+
+#addBudget i {
+   width: 100%;
+   padding-top:7px;
+   color: #835DD4;
+}
+
+#addBudget a{
+    padding: 3;
+    display:inline-block;
+    height: inherit;
+    width: 100%;
+}
+
+#addBudget{
+    margin: 0;
+    width: auto;
+    padding: 0;
+    margin-left: 4px;
+    display:inline-block;
+}
+
 #delete{
     display: inline;
 }
 
 #FTbut{
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
 }
 
 #budgetSubmit{
-    margin-top: 5px; 
+    margin-top: 5px;
 }
-

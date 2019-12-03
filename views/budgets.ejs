@@ -5,7 +5,7 @@
     <div class="ui top attached segment">
         <div class="ui divided items">
           <div class="ui header">Add a new budget
-            <a href="/budgets/new" id="add" class="ui positive basic button"><i class="plus icon"></i></a>
+            <div id="addBudget" class="ui violet basic button"><a href="/budgets/new" ><i class="plus icon"></i></a></div>
           </div>
             <% budgets.forEach(function(budget){ %>
                 <div class="item">
@@ -22,10 +22,12 @@
                         </div>
                         <!-- TODO fixed costs -->
                         <div class="extra">
-                            <a href="/budgets/<%=budget._id%>" class="ui floated basic violet button">
-                            Read More
-                            <i class="right chevron icon"></i>
-                            </a>
+                          <div id="readButton" >
+                              <a class="ui floated basic violet button" href="/budgets/<%=budget._id%>">
+                                <div id="readText">Read More</div>
+                                <i class="right chevron icon"></i>
+                              </a>
+                          </div>
                         </div>
                     </div>
                 </div>
