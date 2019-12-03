@@ -19,12 +19,6 @@ $(document).ready(function()
         $(".textsize").css({"width":"28%", "margin-right":"5px"}); 
         $(".butsize").css({"width":"15%"}); 
 
-/*         $('.num' + count.toString()).click(function () 
-        {
-            alert('Clicked but' + count.toString());
-            $('.num' + count.toString()).remove();
-        }); */
-        
         count++;
     });
 

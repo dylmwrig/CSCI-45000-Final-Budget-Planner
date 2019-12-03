@@ -9,11 +9,18 @@
             <label>Total Amount Constraint</label>
                 <input required type="number" name="budget[amountConstraint]" value="<%=budget.amountConstraint%>">
 
+            <%
+                //For autoprefill
+                var sd = new Date(budget.startDate);
+                var sdString = sd.toISOString().split('T')[0];
+                var ed = new Date(budget.endDate);
+                var edString = ed.toISOString().split('T')[0]
+            %>
             <label>Start Date</label>
-                <input required type="date" name="budget[startDate]" value="<%=budget.startDate%>">
+                <input required type="date" name="budget[startDate]" value="<%=sdString%>">
 
             <label>End Date</label>
-                <input required type="date" name="budget[endDate]" value="<%=budget.endDate%>">
+                <input required type="date" name="budget[endDate]" value="<%=edString%>">
             
             <label>Fixed Costs</label>
             <br>  

@@ -83,6 +83,11 @@ app.post("/transactions",function(req,res){
     //Make sure user input doesn't have script tags (may be malicious)
     req.body.transaction.body = req.sanitize(req.body.transaction.name);
 
+    var input = req.body.transaction;
+
+    //Conversion from UTC to local time
+   // input.created = input.created.ToLocalTime();
+
     //create transaction
     Transaction.create(req.body.transaction, function(err,newTransaction){
         //If error, render new transaction page again
@@ -137,12 +142,15 @@ app.delete("/transactions/:id",function(req,res){
     //Find transaction in DB and delete it
     Transaction.findByIdAndRemove(req.params.id, function(err){
         if (err)
-            res.redirect("/transactions");
+            res.redirect("/transactions/" +  req.params.id);
         else
             res.redirect("/transactions");
     });
 });
 
+/* BUDGET ROUTES (Similar to the transactions routes above) */
+
+//Get all budgets and display
 app.get('/budgets', function(req,res) {
     Budget.find({}, function(err,budgets){
           if (err){
@@ -165,7 +173,7 @@ app.post("/budgets/new",function(req,res){
   
   var input = req.body.budget;
 
-  // Check if both fields have been filled in
+  // Validation for start and end dates
   if(input.endDate  <= input.startDate){
       res.render('newBudget', { error: 'Please ensure end date is after start date'});
   }
@@ -209,6 +217,7 @@ app.put("/budgets/:id",function(req,res){
    
     var input = req.body.budget;
 
+    //Validation
     if(input.endDate<= input.startDate){
         res.redirect("/budgets");
     }
@@ -234,6 +243,7 @@ app.delete("/budgets/:id",function(req,res){
 });
 
 app.get("/graphs",function(req,res){
+    //Load all transactions
     Transaction.find({}, function(err,transactions){
         if (err){
             console.log("ERROR!");
@@ -247,6 +257,7 @@ app.get("/graphs",function(req,res){
     });
 });
 
+//Start app
 app.listen(port, function(){
     console.log("App started on " + port);
 });
