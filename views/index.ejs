@@ -18,10 +18,13 @@
                             <p><span><strong>Category: </strong>&nbsp;</span><%- transaction.category %></p>
                         </div>
                         <div class="extra">
-                            <a href="/transactions/<%=transaction._id%>" class="ui floated basic violet button">
-                            Read More
-                            <i class="right chevron icon"></i>
-                            </a>
+
+                            <div id="chevronButton">
+                                <a href="/transactions/<%=transaction._id%>" class="ui floated basic violet button">
+                                Read More
+                                <i class="right chevron icon"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

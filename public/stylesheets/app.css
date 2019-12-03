@@ -6,20 +6,23 @@ i.icon{
     margin-top: 5em;
 }
 
+.graphBtn{
+    padding-right: 5 !important;
+}
 
-#readButton{
+#chevronButton{
     margin: 0;
     padding: 0;
 }
 
-#readButton a{
+#chevronButton a{
     padding: 10;
     padding-right: 0;
     height: inherit;
     width: inherit;
 }
 
-#readButton i{
+#chevronButton i{
     height: 100%;
     margin: 0;
 }
