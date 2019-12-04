@@ -7,6 +7,9 @@ module.exports = {
       .click('button[id=catViewBtn]')
       .useXpath()
       .click("//a[normalize-space()='Budgets']")
-      .pause(5000);
+      .useCss()
+      .assert.containsText(".header","Budget Calculator")
+      .assert.visible('div[class=amountConstraint]')
+      .pause(1000);
   }
 };
