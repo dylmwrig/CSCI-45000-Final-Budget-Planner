@@ -1,8 +1,13 @@
-import { Selector } from 'testcafe';
-
-fixture `Getting Started`
-    .page `http://localhost:3000/transactions/new`;
-
-test('My first test', async t => {
-    // Test code
-});
+module.exports = {
+  'Budget Calculator Test' : function (browser) {
+    browser
+      .url('https://budgetplannerv1.herokuapp.com/transactions/new')
+      .waitForElementVisible('input[type=text]')
+	  .setValue('input[type=text]', 'test name')
+	  .setValue('input[type=number]', '100')
+	  .click('input[type=submit]')
+	  .useXpath()
+      .assert.visible("//a[text()='test name']")
+      .useCss()  
+  }
+}
