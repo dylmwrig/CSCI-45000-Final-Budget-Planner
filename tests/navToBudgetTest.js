@@ -1,5 +1,5 @@
 module.exports = {
-  'Budget Calculator Test' : function (client) {
+  'New Budget UI Test' : function (client) {
     client
       .url('http://budgetplannerv1.herokuapp.com/graphs')
       .pause(1000)
