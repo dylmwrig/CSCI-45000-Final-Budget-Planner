@@ -5,9 +5,9 @@
 
   <testsuite name="navToBudgetTest"
     errors="0" failures="0" hostname="" id="" package="navToBudgetTest" skipped="0"
-    tests="1" time="3.445" timestamp="">
+    tests="1" time="3.558" timestamp="">
   
-    <testcase name="Budget Calculator Test" classname="navToBudgetTest" time="3.445" assertions="3">
+    <testcase name="Budget Calculator Test" classname="navToBudgetTest" time="3.558" assertions="3">
 
     
 
