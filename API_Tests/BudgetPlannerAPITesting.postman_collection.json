@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "15edcd76-528d-4bef-ba05-ac4bb2515c53",
+		"name": "BudgetPlannerAPITesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET home page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6bc16367-8863-4120-8d66-2276ba3558b6",
+						"exec": [
+							"pm.test(\"Status Code == 200?\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://budgetplannerv1.herokuapp.com/transactions",
+					"protocol": "https",
+					"host": [
+						"budgetplannerv1",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete transaction item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc1d7184-3aa6-4955-b8fd-313d3335cbf5",
+						"exec": [
+							"pm.test(\"Status Code == 200?\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://budgetplannerv1.herokuapp.com/transactions/5de59620ddf26517600429c3",
+					"protocol": "https",
+					"host": [
+						"budgetplannerv1",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"transactions",
+						"5de59620ddf26517600429c3"
+					]
+				},
+				"description": "This is dependent on transaction id in url"
+			},
+			"response": []
+		},
+		{
+			"name": "GET new transaction page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c49fe07-c3c0-4d0c-8390-d2ba4981a7e5",
+						"exec": [
+							"pm.test(\"Status Code == 200?\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://budgetplannerv1.herokuapp.com/transactions/new",
+					"protocol": "https",
+					"host": [
+						"budgetplannerv1",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"transactions",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET budgets page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a3d3915c-634a-4ad6-8622-23e473fceaef",
+						"exec": [
+							"pm.test(\"Status Code == 200?\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://budgetplannerv1.herokuapp.com/budgets",
+					"protocol": "https",
+					"host": [
+						"budgetplannerv1",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"budgets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Budget",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a422858a-d0bd-4386-ad95-44e4521cad70",
+						"exec": [
+							"pm.test(\"Status Code == 200?\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://budgetplannerv1.herokuapp.com/budgets/5de5b256ddf26517600429c7",
+					"protocol": "https",
+					"host": [
+						"budgetplannerv1",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"budgets",
+						"5de5b256ddf26517600429c7"
+					]
+				},
+				"description": "Delete certain budget given by the id name in the url"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Visual Spending page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "29b8bf48-0622-4c99-b6db-70667126d8c0",
+						"exec": [
+							"pm.test(\"Status Code == 200?\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://budgetplannerv1.herokuapp.com/graphs",
+					"protocol": "https",
+					"host": [
+						"budgetplannerv1",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"graphs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
