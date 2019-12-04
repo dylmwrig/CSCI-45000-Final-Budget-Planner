@@ -11,13 +11,21 @@
                     <label>Amount Constraint</label>
                     <input required type="number" name="budget[amountConstraint]" placeholder="How much can you spend">
                 </div>
+
+                <% 
+                    var sd = new Date();
+                    var sdString = sd.toISOString().split('T')[0];
+                    var ed = new Date();
+                    ed.setDate(ed.getDate()+1);
+                    var edString = ed.toISOString().split('T')[0];
+                  %>
                 <div class="field">
                     <label>Start Date</label>
-                    <input required type="date" name="budget[startDate]" placeholder="Start date">
+                    <input required type="date" name="budget[startDate]" placeholder="Start date" value="<%=sdString%>">
                 </div>
                 <div class="field">
                     <label>End Date</label>
-                    <input required type="date" name="budget[endDate]" placeholder="End date">
+                    <input required type="date" name="budget[endDate]" placeholder="End date" value="<%=edString%>">
                 </div>
                
                <div id="fixedTransContainer"> 

@@ -23,7 +23,12 @@
                 </div>
                 <div class="field">
                     <label>Date</label>
-                    <input required type="date" name="transaction[created]" placeholder="Date of transaction">
+                    <% 
+                        var d = new Date();
+                        var dString = d.toISOString().split('T')[0];
+                    %>
+
+                    <input required type="date" name="transaction[created]" placeholder="Date of transaction" value="<%=dString%>">
                 </div>
                 <div>
                     <input class="ui button" type="submit">

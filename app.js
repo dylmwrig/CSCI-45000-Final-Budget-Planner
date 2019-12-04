@@ -27,6 +27,7 @@ mongoose.set('useCreateIndex', true);
 //App setup
 app.set("view engine","ejs");
 app.use(express.static("public"));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
@@ -84,9 +85,8 @@ app.post("/transactions",function(req,res){
     req.body.transaction.body = req.sanitize(req.body.transaction.name);
 
     var input = req.body.transaction;
+    console.log( req.body);
 
-    //Conversion from UTC to local time
-   // input.created = input.created.ToLocalTime();
 
     //create transaction
     Transaction.create(req.body.transaction, function(err,newTransaction){
@@ -117,8 +117,13 @@ app.get("/transactions/:id/edit",function(req,res){
     Transaction.findById(req.params.id, function(err, foundTransaction){
         if (err)
             res.redirect("/transactions");
-        else
+        else{
+            //JSON.stringify(foundTransaction);
+            
             res.render("editTransaction",{transaction: foundTransaction});
+            //res.json(foundTransaction);
+        }
+            
     });
 });
 
@@ -208,7 +213,11 @@ app.get("/budgets/:id/edit",function(req,res){
         if (err)
             res.redirect("/budgets");
         else
+        {
+          //  var json = JSON.parse(foundBudget);
+           // res.JSON(json);
             res.render("editBudget",{budget: foundBudget});
+        }
     });
 });
 
