@@ -5,9 +5,9 @@
 
   <testsuite name="navToBudgetTest"
     errors="0" failures="0" hostname="" id="" package="navToBudgetTest" skipped="0"
-    tests="1" time="5.428" timestamp="">
+    tests="1" time="3.445" timestamp="">
   
-    <testcase name="Budget Calculator Test" classname="navToBudgetTest" time="5.428" assertions="3">
+    <testcase name="Budget Calculator Test" classname="navToBudgetTest" time="3.445" assertions="3">
 
     
 
@@ -17,13 +17,6 @@
     </testcase>
   
 
-  
-    <system-err>
-      [0;31m  NoSuchElementError: An error occurred while running .isVisible() command on &lt;//a[text()=August]&gt;: undefined; undefined
-   {&#34;sessionId&#34;:&#34;48c3614627b609906ffeb29f06ebb72c&#34;,&#34;status&#34;:0,&#34;value&#34;:[]}[0m
-[0;90m       at &lt;anonymous&gt;
-       at process._tickCallback (internal/process/next_tick.js:188:7)[0m
-    </system-err>
   
 
   

@@ -6,14 +6,13 @@ module.exports = {
       .click('#addBudget a')
       .waitForElementVisible('#budgetSubmit')
       .assert.visible('#budgetSubmit')
-      .waitForElementVisible()
-      .useXpath()
-      .assert.visible("//a[text()='August']")
-      .useCss()
+      .setValue('input[placeholder="Budget Name"]', "Nightwatch Budget")
+      .setValue('input[placeholder="How much can you spend"]', 33)
+      .click("#budgetSubmit")
 
-      .setValue('input[type=text]', 'nightwatch.js')
-      .click('button[type=submit]', function(result) {
-        this.assert.strictEqual(result.status, 0);
-      })
+      .useXpath()
+      .assert.visible("//a[text()='Nightwatch Budget']")
+      .useCss()
+      .pause(1000);
   }
 };
