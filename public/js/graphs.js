@@ -86,8 +86,6 @@ var allBudgets = document.getElementById('budgetContainer').textContent;
 allTransactions = JSON.parse(allTransactions);
 allBudgets = JSON.parse(allBudgets);
 
-console.log(allTransactions);
-
 var b = allBudgets[0];
 var amountConstraint = b["amountConstraint"];
 var values = [];
