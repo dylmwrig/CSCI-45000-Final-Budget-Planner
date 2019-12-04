@@ -7,7 +7,7 @@ module.exports = {
       .waitForElementVisible('#budgetSubmit')
       .assert.visible('#budgetSubmit')
       .setValue('input[placeholder="Budget Name"]', "Nightwatch Budget")
-      .setValue('input[placeholder="How much can you spend"]', 33)
+      .setValue('input[placeholder="How much can you spend"]', '33')
       .click("#budgetSubmit")
 
       .useXpath()
