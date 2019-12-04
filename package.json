@@ -31,6 +31,8 @@
     "method-override": "^3.0.0",
     "mongodb": "^3.3.0",
     "mongoose": "^5.6.9",
+    "request": "^2.88.0",
+    "slimerjs": "^1.0.0",
     "phantomjs": "^2.1.7",
     "phantomjs-prebuilt": "^2.1.16",
     "request": "^2.88.0"
