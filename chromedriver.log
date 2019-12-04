@@ -2,4 +2,4 @@ Starting ChromeDriver 78.0.3904.70 (edb9c9f3de0247fd912a77b7f6cae7447f6d3ad5-ref
 Only local connections are allowed.
 Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
 IPv6 port not available. Exiting...
-[1575426111.326][SEVERE]: bind() failed: Address already in use (98)
+[1575429306.754][SEVERE]: bind() failed: Address already in use (98)
